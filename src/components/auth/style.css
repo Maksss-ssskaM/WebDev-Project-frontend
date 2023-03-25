@@ -1,0 +1,16 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+.root .form {
+  width: 80%;
+}
+.root .form .incitingText {
+  color: #1900D5;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=style.css.map */
