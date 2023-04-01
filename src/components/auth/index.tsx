@@ -4,8 +4,8 @@ import LoginPage from "./login";
 import RegisterPage from "./register";
 import './style.scss'
 import {Box} from "@mui/material";
-import {instance} from "../utils/axios";
-import {useAppDispatch} from "../utils/hook";
+import {instance} from "../../utils/axios";
+import {useAppDispatch} from "../../utils/hook";
 import { login } from '../../store/slice/auth';
 
 const AuthRootComponent: React.FC = (): JSX.Element => {

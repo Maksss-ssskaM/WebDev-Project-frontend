@@ -3,7 +3,7 @@ import Home from "./components/home";
 import {Route, Routes} from "react-router-dom";
 import LoginPage from "./components/auth/login";
 import RegisterPage from './components/auth/register';
-import PrivateRoute from "./components/utils/router/privateRoute";
+import PrivateRoute from "./utils/router/privateRoute";
 import AuthRootComponent from "./components/auth";
 
 function App() {

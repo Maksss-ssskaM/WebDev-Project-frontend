@@ -25,4 +25,14 @@ interface IPublicUser {
     email: string,
     createdAt: string,
     updatedAt: string,
+    watchList: [IWatchlist]
+}
+
+interface IWatchlist {
+    id: number,
+    name: string,
+    assetId: string,
+    createdAt: string,
+    updatedAt: string,
+    user: number
 }
