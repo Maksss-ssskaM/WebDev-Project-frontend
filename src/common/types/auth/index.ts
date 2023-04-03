@@ -1,6 +1,6 @@
 export interface IPropsLogin {
-    setEmail: (value: string) => void
     setPassword: (value: string) => void
+    setEmail: (value: string) => void
     navigate: (to: string) => void
 }
 
@@ -14,25 +14,25 @@ export interface IPropsRegister {
 }
 
 export interface IAuthState {
-    user: {} | IPublicUser,
+    user: IPublicUser,
     isLogged: boolean
 }
 
 interface IPublicUser {
-    id: number,
+    id: number | null,
     firstName: string,
     username: string,
     email: string,
     createdAt: string,
-    updatedAt: string,
-    watchList: [IWatchlist]
+    updatedAt: string
+    watchlist:[IWatchlist]
 }
 
 interface IWatchlist {
-    id: number,
+    id: number | null,
     name: string,
     assetId: string,
     createdAt: string,
     updatedAt: string,
-    user: number
+    user: number | null
 }
