@@ -7,7 +7,7 @@ import SidebarComponent from "../sidebar";
 import {useStyles} from "./styles";
 
 const LayoutComponent = ({children}: ILayout) => {
-    const[isOpen, setIsOpen] = useState(true)
+    const[isOpen, setIsOpen] = useState(false)
     const location = useLocation()
     const isNonMobile = useMediaQuery('(min-width: 600px)')
     const classes = useStyles()
@@ -27,10 +27,13 @@ const LayoutComponent = ({children}: ILayout) => {
                             isNonMobile={isNonMobile}
                             drawerWidth='250px'
                             isOpen={isOpen}
-                            setisOpen={setIsOpen}
+                            setIsOpen={setIsOpen}
                         />
                         <Box className={classes.mainSection}>
-                            <TopBarComponent/>
+                            <TopBarComponent
+                                isOpen={isOpen}
+                                setIsOpen={setIsOpen}
+                            />
                             {children}
                         </Box>
                     </Box>
