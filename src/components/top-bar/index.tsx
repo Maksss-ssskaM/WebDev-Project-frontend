@@ -6,6 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import {ColorModeContext} from "../../theme";
 import {useStyles} from "./styles";
+import {useAppSelector} from "../../utils/hook";
 
 
 const TopBarComponent = () => {
@@ -14,7 +15,7 @@ const TopBarComponent = () => {
     const classes = useStyles()
 
     return (
-        <Box className={classes.root} sx={{ flexGrow: 1 }}>
+        <Box className={classes.root}>
             <Grid>Welcome, Maks</Grid>
             <Box display='flex'>
                 <Grid onClick={colorMode.toggleColorMode} className={classes.iconBlock}>
