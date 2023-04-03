@@ -14,7 +14,8 @@ export const useStyles = makeStyles((theme: Theme) => {
                 padding: '32px 24px',
                 backgroundColor: colors.primary.DEFAULT,
                 maxHeight: '95px',
-                borderBottom: `1px solid ${colors.borderColor}`
+                borderBottom: `1px solid ${colors.borderColor}`,
+                flexGrow: 1
             },
             iconBlock: {
                 paddingRight: '35px',
@@ -32,7 +33,7 @@ export const useStyles = makeStyles((theme: Theme) => {
             },
             searchIcon: {
                 '&:hover': {
-                    'backgroundColor': 'transparent'
+                    backgroundColor: 'transparent !important',
                 }
             },
             searchInput: {

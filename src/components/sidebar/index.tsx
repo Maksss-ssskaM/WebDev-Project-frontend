@@ -21,10 +21,12 @@ import {
     TimelineOutlined,
     MenuBookOutlined,
     SettingsOutlined,
-    LogoutOutlined
+    LogoutOutlined, AutoGraphOutlined
 } from '@mui/icons-material';
 import {useLocation, useNavigate} from "react-router-dom";
 import FlexBetween from "../flex-between";
+import {tokens} from "../../theme";
+import Logo from '../../assets/images/sidebar/logo.png'
 
 const SidebarComponent = (props: any) => {
     const [active, setActive] = useState('')
@@ -33,6 +35,7 @@ const SidebarComponent = (props: any) => {
     const {pathname} = useLocation()
     const navigate = useNavigate()
     const theme = useTheme()
+    const colors = tokens(theme.palette.mode)
 
     useEffect(() => {
         setActive(pathname.substring(1))
@@ -56,11 +59,16 @@ const SidebarComponent = (props: any) => {
                         }
                     }}
                 >
-                    <Box width='100%'>
+                    <Box className={classes.navBlock}>
                         <Box>
                             <FlexBetween>
-                                <Box display='flex' alignItems='center' gap='10px'>
-                                    <Typography>Demo</Typography>
+                                <Box className={classes.brand}>
+                                    <img src={Logo} alt="Logo image"/>
+                                    <Typography
+                                        variant='h1'
+                                        color={theme.palette.mode === 'dark' ?
+                                            colors.white.DEFAULT :
+                                            colors.black.DEFAULT}>Demo</Typography>
                                 </Box>
                                 {!isNonMobile && (
                                     <IconButton onClick={() => setIsOpen(!isOpen)}>
@@ -69,6 +77,62 @@ const SidebarComponent = (props: any) => {
                                     )}
                             </FlexBetween>
                         </Box>
+                        <List className={classes.navList}>
+                            <ListItem key={1}>
+                                <ListItemButton onClick={() => navigate('/')} className={classes.navItem}>
+                                    <ListItemIcon>
+                                        <HomeOutlined/>
+                                    </ListItemIcon>
+                                    <ListItemText>
+                                        <Typography variant='body1'>Главная</Typography>
+                                    </ListItemText>
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem key={2}>
+                                <ListItemButton onClick={() => navigate('/watchlist')} className={classes.navItem}>
+                                    <ListItemIcon>
+                                        <AutoGraphOutlined/>
+                                    </ListItemIcon>
+                                    <ListItemText>
+                                        <Typography variant='body1'>Избраное</Typography>
+                                    </ListItemText>
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem key={3}>
+                                <ListItemButton onClick={() => navigate('/news')} className={classes.navItem}>
+                                    <ListItemIcon>
+                                        <MenuBookOutlined/>
+                                    </ListItemIcon>
+                                    <ListItemText>
+                                        <Typography variant='body1'>Новости</Typography>
+                                    </ListItemText>
+                                </ListItemButton>
+                            </ListItem>
+                            <ListItem key={4}>
+                                <ListItemButton onClick={() => navigate('/settings')} className={classes.navItem}>
+                                    <ListItemIcon>
+                                        <SettingsOutlined/>
+                                    </ListItemIcon>
+                                    <ListItemText>
+                                        <Typography variant='body1'>Настройки</Typography>
+                                    </ListItemText>
+                                </ListItemButton>
+                            </ListItem>
+                        </List>
+                    </Box>
+                    <Box width='100%'>
+                        <List>
+                            <ListItem>
+                                <ListItemButton className={classes.navItem}>
+                                    <ListItemIcon>
+                                        <LogoutOutlined/>
+                                    </ListItemIcon>
+                                    <ListItemText>
+                                        <Typography>Logout</Typography>
+                                    </ListItemText>
+                                </ListItemButton>
+                            </ListItem>
+                        </List>
                     </Box>
                 </Drawer>
             )}
