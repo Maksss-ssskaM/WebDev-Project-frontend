@@ -37,25 +37,6 @@ const TopBarComponent = (props: any) => {
                 </Box>
             </Toolbar>
         </AppBar>
-        // <Box className={classes.root}>
-        //     <Grid>Welcome, Maks</Grid>
-        //     <Box display='flex'>
-        //         <Grid onClick={colorMode.toggleColorMode} className={classes.iconBlock}>
-        //             <IconButton className={classes.themeIcon}>
-        //                 {theme.palette.mode === 'dark' ? (<DarkModeIcon />) : (<LightModeIcon />)}
-        //             </IconButton>
-        //             <IconButton>
-        //                 <NotificationsNoneIcon />
-        //             </IconButton>
-        //         </Grid>
-        //         <Grid className={classes.searchBlock}>
-        //             <IconButton className={classes.searchIcon}>
-        //                 <SearchIcon />
-        //             </IconButton>
-        //             <InputBase className={classes.searchInput} placeholder='Поиск'/>
-        //         </Grid>
-        //     </Box>
-        // </Box>
     );
 };
 

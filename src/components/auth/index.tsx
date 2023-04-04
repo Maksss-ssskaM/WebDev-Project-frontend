@@ -7,6 +7,7 @@ import {Box} from "@mui/material";
 import {instance} from "../../utils/axios";
 import {useAppDispatch} from "../../utils/hook";
 import { login } from '../../store/slice/auth';
+import {useForm} from "react-hook-form";
 
 const AuthRootComponent: React.FC = (): JSX.Element => {
     const location = useLocation()
@@ -20,14 +21,15 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const handleSubmit = async (event: { preventDefault: () => void; }) => {
-        event.preventDefault()
+    const {register, formState: {errors}, handleSubmit} = useForm()
+
+    const handleSubmitForm = async (data: any) => {
 
         if (location.pathname === '/login'){
             try {
                 const userData = {
-                    email: email,
-                    password: password
+                    email: data.email,
+                    password: data.password
                 }
                 const user = await instance.post('auth/login', userData)
                 await dispatch(login(user.data))
@@ -60,7 +62,7 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
 
     return(
         <div className='root'>
-            <form className="form" onSubmit={handleSubmit}>
+            <form className="form" onSubmit={handleSubmit(handleSubmitForm)}>
                 <Box
                     display='flex'
                     justifyContent='center'
@@ -74,9 +76,9 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                 >
                     {location.pathname === '/login'
                         ? <LoginPage
-                            setEmail={setEmail}
-                            setPassword={setPassword}
                             navigate={navigate}
+                            register={register}
+                            errors={errors}
                         /> : location.pathname === '/register'
                             ? <RegisterPage
                                 setEmail={setEmail}
