@@ -8,20 +8,20 @@ import {instance} from "../../utils/axios";
 import {useAppDispatch} from "../../utils/hook";
 import { login } from '../../store/slice/auth';
 import {useForm} from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import {LoginSchema, RegisterSchema} from "../../utils/yup";
+import {AppErrors} from "../../common/errors";
+
 
 const AuthRootComponent: React.FC = (): JSX.Element => {
     const location = useLocation()
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [repeatPassword, setRepeatPassword] = useState('')
-    const [firstName, setFirstName] = useState('')
-    const [username, setUsername] = useState('')
-
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
-    const {register, formState: {errors}, handleSubmit} = useForm()
+    const {register, formState: {errors}, handleSubmit} = useForm({
+        resolver: yupResolver(location.pathname === '/login' ? LoginSchema : RegisterSchema)
+    })
 
     const handleSubmitForm = async (data: any) => {
 
@@ -39,13 +39,13 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
             }
         }
         else{
-            if(password === repeatPassword) {
+            if(data.password === data.repeatPassword) {
                 try{
                     const userData = {
-                        firstName: firstName,
-                        username: username,
-                        email: email,
-                        password: password
+                        firstName: data.name,
+                        username: data.username,
+                        email: data.email,
+                        password: data.password
                     }
                     const newUser = await instance.post('auth/register', userData)
                     await dispatch(login(newUser.data))
@@ -55,7 +55,7 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                 }
             }
             else{
-                throw new Error("Пароли не совпадают")
+                throw new Error(AppErrors.PasswordDoNotMatch)
             }
         }
     }
@@ -81,12 +81,9 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                             errors={errors}
                         /> : location.pathname === '/register'
                             ? <RegisterPage
-                                setEmail={setEmail}
-                                setPassword={setPassword}
-                                setRepeatPassword={setRepeatPassword}
-                                setFirstName={setFirstName}
-                                setUsername={setUsername}
                                 navigate={navigate}
+                                register={register}
+                                errors={errors}
                             />
                             : null}
                 </Box>

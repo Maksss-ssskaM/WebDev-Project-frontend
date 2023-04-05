@@ -16,23 +16,17 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
                 variant="outlined"
                 placeholder="Введите ваш email"
                 helperText={errors.email ? `${errors.email.message}` : ''}
-                {...register('email', {
-                    required: 'Это обязательное поле',
-                    pattern: /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u
-                })}
+                {...register('email')}
             />
             <TextField
                 error={!!errors.password}
                 fullWidth={true}
                 margin='normal'
-                label="Password"
+                label="Пароль"
                 variant="outlined"
                 placeholder="Введите ваш пароль"
                 helperText={errors.password ? `${errors.password.message}` : ''}
-                {...register('password', {
-                    required: 'Это обязательное поле',
-                    minLength: 6
-                })}
+                {...register('password')}
             />
             <Button type='submit' sx={{fontFamily: "Poppins", marginTop: 2, marginBottom: 2, width: '60%'}} variant="contained">Войти</Button>
             <Typography variant="body1" sx={{fontFamily: "Poppins"}}>У вас нет аккаунта? <span className="incitingText" onClick={() => navigate('/register')}>Регистрация</span></Typography>
