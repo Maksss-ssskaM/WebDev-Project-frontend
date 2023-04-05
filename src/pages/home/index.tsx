@@ -1,6 +1,6 @@
 import React from 'react';
 import {socket, WebsocketContext, WebsocketProvider} from "../../common/contexts/WebsocketContext";
-import {Websocket} from "../websocket/Websocket";
+import {Websocket} from "../../components/websocket/Websocket";
 
 const Home = () => {
     return (

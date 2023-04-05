@@ -3,7 +3,6 @@ import {useStyles} from './styles';
 import  {
     Box,
     Drawer,
-    Divider,
     IconButton,
     List,
     ListItem,
@@ -17,8 +16,6 @@ import  {
 import {
     HomeOutlined,
     ChevronLeftOutlined,
-    ChevronRightOutlined,
-    TimelineOutlined,
     MenuBookOutlined,
     SettingsOutlined,
     LogoutOutlined, AutoGraphOutlined
@@ -27,8 +24,9 @@ import {useLocation, useNavigate} from "react-router-dom";
 import FlexBetween from "../flex-between";
 import {tokens} from "../../theme";
 import Logo from '../../assets/images/sidebar/logo.png'
+import {ISidebarProps} from "../../common/types/sidebar";
 
-const SidebarComponent = (props: any) => {
+const SidebarComponent: React.FC<ISidebarProps> = (props: ISidebarProps): JSX.Element => {
     const [active, setActive] = useState('')
     const {isNonMobile, drawerWidth, isOpen, setIsOpen} = props
     const classes = useStyles()
@@ -38,7 +36,7 @@ const SidebarComponent = (props: any) => {
     const colors = tokens(theme.palette.mode)
 
     useEffect(() => {
-        setActive(pathname.substring(1))
+        setActive(pathname)
     }, [pathname])
 
     return (
@@ -79,7 +77,10 @@ const SidebarComponent = (props: any) => {
                         </Box>
                         <List className={classes.navList}>
                             <ListItem key={1}>
-                                <ListItemButton onClick={() => navigate('/')} className={classes.navItem}>
+                                <ListItemButton onClick={() => navigate('/')}
+                                                className={active === '/'
+                                                    ? `${classes.navItem} ${classes.active}`
+                                                    : `${classes.navItem}`}>
                                     <ListItemIcon>
                                         <HomeOutlined/>
                                     </ListItemIcon>
@@ -89,7 +90,10 @@ const SidebarComponent = (props: any) => {
                                 </ListItemButton>
                             </ListItem>
                             <ListItem key={2}>
-                                <ListItemButton onClick={() => navigate('/watchlist')} className={classes.navItem}>
+                                <ListItemButton onClick={() => navigate('/watchlist')}
+                                                className={active === '/watchlist'
+                                                    ? `${classes.navItem} ${classes.active}`
+                                                    : `${classes.navItem}`}>
                                     <ListItemIcon>
                                         <AutoGraphOutlined/>
                                     </ListItemIcon>
@@ -99,7 +103,10 @@ const SidebarComponent = (props: any) => {
                                 </ListItemButton>
                             </ListItem>
                             <ListItem key={3}>
-                                <ListItemButton onClick={() => navigate('/news')} className={classes.navItem}>
+                                <ListItemButton onClick={() => navigate('/news')}
+                                                className={active === '/news'
+                                                    ? `${classes.navItem} ${classes.active}`
+                                                    : `${classes.navItem}`}>
                                     <ListItemIcon>
                                         <MenuBookOutlined/>
                                     </ListItemIcon>
@@ -109,7 +116,10 @@ const SidebarComponent = (props: any) => {
                                 </ListItemButton>
                             </ListItem>
                             <ListItem key={4}>
-                                <ListItemButton onClick={() => navigate('/settings')} className={classes.navItem}>
+                                <ListItemButton onClick={() => navigate('/settings')}
+                                                className={active === '/settings'
+                                                    ? `${classes.navItem} ${classes.active}`
+                                                    : `${classes.navItem}`}>
                                     <ListItemIcon>
                                         <SettingsOutlined/>
                                     </ListItemIcon>

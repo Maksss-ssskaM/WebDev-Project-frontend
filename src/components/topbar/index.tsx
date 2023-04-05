@@ -4,9 +4,10 @@ import {LightMode, DarkMode, Search, NotificationsNone, MenuOutlined} from '@mui
 import {ColorModeContext} from "../../theme";
 import {useStyles} from "./styles";
 import FlexBetween from "../flex-between";
+import {ITopbarProps} from "../../common/types/topbar";
 
 
-const TopBarComponent = (props: any) => {
+const TopBarComponent: React.FC<ITopbarProps> = (props: ITopbarProps): JSX.Element => {
     const theme = useTheme()
     const colorMode: any = useContext(ColorModeContext)
     const classes = useStyles()

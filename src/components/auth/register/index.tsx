@@ -1,9 +1,12 @@
 import React from 'react';
 import {Button, TextField, Typography} from "@mui/material";
 import {IPropsRegister} from "../../../common/types/auth";
+import {useStyles} from "../styles";
+import AppButton from "../../app-button";
 
 const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => {
     const {navigate, register, errors} = props
+    const classes = useStyles()
     return (
         <>
             <Typography variant="h2" fontFamily="Poppins" textAlign="center">Регистрация</Typography>
@@ -60,8 +63,8 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
                 helperText={errors.repeatPassword ? `${errors.repeatPassword.message}` : ''}
                 {...register('repeatPassword')}
             />
-            <Button type='submit' sx={{fontFamily: "Poppins", marginTop: 2, marginBottom: 2, width: '60%'}} variant="contained">Регистрация</Button>
-            <Typography variant="body1" sx={{fontFamily: "Poppins"}}>У вас есть аккаунт? <span className="incitingText" onClick={() => navigate('/login')}>Авторизация</span></Typography>
+            <AppButton type='submit' sx={{fontFamily: "Poppins", marginTop: 2, marginBottom: 2, width: '60%'}} variant="contained">Регистрация</AppButton>
+            <Typography variant="body1" sx={{fontFamily: "Poppins"}}>У вас есть аккаунт? <span className={classes.incitingText} onClick={() => navigate('/login')}>Авторизация</span></Typography>
         </>
     );
 };
