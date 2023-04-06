@@ -10,8 +10,9 @@ import { getPopularAssets } from "../../store/thunks/assets";
 import { string } from "yup";
 import { Box, Grid } from "@mui/material";
 import { useStyles } from "./styles";
+import AreaChart from "../../components/charts/area-chart";
 
-const Home = () => {
+const Home: React.FC = (): JSX.Element => {
     const classes = useStyles();
     const popularAssetName = useMemo(() => ["bitcoin", "ethereum"], []);
 
@@ -44,9 +45,9 @@ const Home = () => {
     const renderPopularBlock = filteredArray.map((element: any) => {
         const currentPrice = element.data.prices[0];
         const currentCap = element.data.market_caps[0];
-
+        console.log(popularAssets);
         return (
-            <Grid item xs={12} md={6} lg={6}>
+            <Grid item xs={12} md={6} lg={6} key={element.name}>
                 <Grid container className={classes.topCardItem}>
                     <Grid item xs={12} sm={6} lg={6}>
                         <h3 className={classes.assetName}>{element.name}</h3>
@@ -60,7 +61,7 @@ const Home = () => {
                         </div>
                     </Grid>
                     <Grid item xs={12} sm={6} lg={6}>
-                        <h5 className={classes.chart}>Chart</h5>
+                        <AreaChart data={element.data.prices} />
                     </Grid>
                 </Grid>
             </Grid>

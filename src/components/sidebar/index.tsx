@@ -64,7 +64,7 @@ const SidebarComponent: React.FC<ISidebarProps> = (
                         <Box>
                             <FlexBetween>
                                 <Box className={classes.brand}>
-                                    <img src={Logo} alt="Logo image" />
+                                    <img src={Logo} alt="Logo" />
                                     <Typography
                                         variant="h1"
                                         color={
