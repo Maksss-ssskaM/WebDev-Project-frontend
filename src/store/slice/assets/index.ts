@@ -1,20 +1,20 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {getPopularAssets} from "../../thunks/assets";
+import { createSlice } from "@reduxjs/toolkit";
+import { getPopularAssets } from "../../thunks/assets";
 
 const initialState: any = {
     assets: [],
-    popularAssets: []
-}
+    popularAssets: [],
+};
 
 export const assetSlice = createSlice({
-    name: 'assets',
+    name: "assets",
     initialState,
     reducers: {},
-    extraReducers: builder => {
+    extraReducers: (builder) => {
         builder.addCase(getPopularAssets.fulfilled, (state, action) => {
-            state.popularAssets.push(action.payload)
-        })
-    }
-})
+            state.popularAssets.push(action.payload);
+        });
+    },
+});
 
-export default assetSlice.reducer
+export default assetSlice.reducer;

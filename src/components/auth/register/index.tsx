@@ -1,16 +1,27 @@
-import React from 'react';
-import {Button, TextField, Typography} from "@mui/material";
-import {IPropsRegister} from "../../../common/types/auth";
-import {useStyles} from "../styles";
+import React from "react";
+import { Button, TextField, Typography } from "@mui/material";
+import { IPropsRegister } from "../../../common/types/auth";
+import { useStyles } from "../styles";
 import AppLoadingButton from "../../loading-button";
 
-const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Element => {
-    const {navigate, register, errors, loading} = props
-    const classes = useStyles()
+const RegisterPage: React.FC<IPropsRegister> = (
+    props: IPropsRegister,
+): JSX.Element => {
+    const { navigate, register, errors, loading } = props;
+    const classes = useStyles();
     return (
         <>
-            <Typography variant="h2" fontFamily="Poppins" textAlign="center">Регистрация</Typography>
-            <Typography variant="body1" marginBottom={3} fontFamily="Poppins" textAlign="center">Введите данные для регистрации</Typography>
+            <Typography variant="h2" fontFamily="Poppins" textAlign="center">
+                Регистрация
+            </Typography>
+            <Typography
+                variant="body1"
+                marginBottom={3}
+                fontFamily="Poppins"
+                textAlign="center"
+            >
+                Введите данные для регистрации
+            </Typography>
             <TextField
                 error={!!errors.name}
                 fullWidth={true}
@@ -18,8 +29,8 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
                 label="Name"
                 variant="outlined"
                 placeholder="Введите ваше имя"
-                helperText={errors.name ? `${errors.name.message}` : ''}
-                {...register('name')}
+                helperText={errors.name ? `${errors.name.message}` : ""}
+                {...register("name")}
             />
             <TextField
                 error={!!errors.username}
@@ -28,8 +39,8 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
                 label="Username"
                 variant="outlined"
                 placeholder="Введите ваш username"
-                helperText={errors.username ? `${errors.username.message}` : ''}
-                {...register('username')}
+                helperText={errors.username ? `${errors.username.message}` : ""}
+                {...register("username")}
             />
             <TextField
                 error={!!errors.email}
@@ -38,33 +49,57 @@ const RegisterPage: React.FC<IPropsRegister> = (props: IPropsRegister): JSX.Elem
                 label="Email"
                 variant="outlined"
                 placeholder="Введите ваш email"
-                helperText={errors.email ? `${errors.email.message}` : ''}
-                {...register('email')}
+                helperText={errors.email ? `${errors.email.message}` : ""}
+                {...register("email")}
             />
             <TextField
                 error={!!errors.password}
                 type="password"
                 fullWidth={true}
-                margin='normal'
+                margin="normal"
                 label="Password"
                 variant="outlined"
                 placeholder="Введите ваш пароль"
-                helperText={errors.password ? `${errors.password.message}` : ''}
-                {...register('password')}
+                helperText={errors.password ? `${errors.password.message}` : ""}
+                {...register("password")}
             />
             <TextField
                 error={!!errors.repeatPassword}
                 type="password"
                 fullWidth={true}
-                margin='normal'
+                margin="normal"
                 label="Password"
                 variant="outlined"
                 placeholder="Повторите ваш пароль"
-                helperText={errors.repeatPassword ? `${errors.repeatPassword.message}` : ''}
-                {...register('repeatPassword')}
+                helperText={
+                    errors.repeatPassword
+                        ? `${errors.repeatPassword.message}`
+                        : ""
+                }
+                {...register("repeatPassword")}
             />
-            <AppLoadingButton loading={loading} type='submit' sx={{fontFamily: "Poppins", marginTop: 2, marginBottom: 2, width: '60%'}} variant="contained">Регистрация</AppLoadingButton>
-            <Typography variant="body1" sx={{fontFamily: "Poppins"}}>У вас есть аккаунт? <span className={classes.incitingText} onClick={() => navigate('/login')}>Авторизация</span></Typography>
+            <AppLoadingButton
+                loading={loading}
+                type="submit"
+                sx={{
+                    fontFamily: "Poppins",
+                    marginTop: 2,
+                    marginBottom: 2,
+                    width: "60%",
+                }}
+                variant="contained"
+            >
+                Регистрация
+            </AppLoadingButton>
+            <Typography variant="body1" sx={{ fontFamily: "Poppins" }}>
+                У вас есть аккаунт?{" "}
+                <span
+                    className={classes.incitingText}
+                    onClick={() => navigate("/login")}
+                >
+                    Авторизация
+                </span>
+            </Typography>
         </>
     );
 };
