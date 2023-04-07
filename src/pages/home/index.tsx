@@ -11,6 +11,8 @@ import { string } from "yup";
 import { Box, Grid } from "@mui/material";
 import { useStyles } from "./styles";
 import AreaChart from "../../components/charts/area-chart";
+import TrendUp from "../../assets/images/charts/trend-up.svg";
+import TrendDown from "../../assets/images/charts/trend-down.svg";
 
 const Home: React.FC = (): JSX.Element => {
     const classes = useStyles();
@@ -43,9 +45,16 @@ const Home: React.FC = (): JSX.Element => {
     );
 
     const renderPopularBlock = filteredArray.map((element: any) => {
-        const currentPrice = element.data.prices[0];
-        const currentCap = element.data.market_caps[0];
-        console.log(popularAssets);
+        const currentPrice = element.singleAsset.map(
+            (element: any) => element.current_price,
+        );
+        const currentCap = element.singleAsset.map(
+            (element: any) => element.market_cap,
+        );
+        const changePrice = element.singleAsset.map(
+            (element: any) => element.price_change_percentage_24h,
+        );
+
         return (
             <Grid item xs={12} md={6} lg={6} key={element.name}>
                 <Grid container className={classes.topCardItem}>
@@ -53,15 +62,33 @@ const Home: React.FC = (): JSX.Element => {
                         <h3 className={classes.assetName}>{element.name}</h3>
                         <div className={classes.itemDetails}>
                             <h3 className={classes.cardPrice}>
-                                ${currentPrice[1].toFixed(2)}
+                                ${currentPrice}
                             </h3>
-                            <p className={classes.cardCapitalize}>
-                                ${currentCap[1].toFixed(0)}
-                            </p>
+                            <div className={classes.additionalInfo}>
+                                <Box
+                                    className={
+                                        changePrice > 0
+                                            ? `${classes.priceTrend} ${classes.trendUp}`
+                                            : `${classes.priceTrend} ${classes.trendDown}`
+                                    }
+                                >
+                                    {changePrice > 0 ? (
+                                        <img src={TrendUp} alt="TrendUp" />
+                                    ) : (
+                                        <img src={TrendDown} alt="TrendDown" />
+                                    )}
+                                    <span>
+                                        %{Number(changePrice).toFixed(2)}
+                                    </span>
+                                </Box>
+                                <div className={classes.cardCapitalize}>
+                                    ${currentCap}
+                                </div>
+                            </div>
                         </div>
                     </Grid>
                     <Grid item xs={12} sm={6} lg={6}>
-                        <AreaChart data={element.data.prices} />
+                        <AreaChart data={element.data} />
                     </Grid>
                 </Grid>
             </Grid>
