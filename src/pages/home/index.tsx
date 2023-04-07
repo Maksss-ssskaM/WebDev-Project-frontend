@@ -6,7 +6,7 @@ import {
 } from "../../common/contexts/WebsocketContext";
 import { Websocket } from "../../components/websocket/Websocket";
 import { useAppDispatch, useAppSelector } from "../../utils/hook";
-import { getPopularAssets } from "../../store/thunks/assets";
+import { getPopularAssets, getTopPriceData } from "../../store/thunks/assets";
 import { string } from "yup";
 import { Box, Grid } from "@mui/material";
 import { useStyles } from "./styles";
@@ -14,7 +14,8 @@ import AreaChart from "../../components/charts/area-chart";
 import TrendUp from "../../assets/images/charts/trend-up.svg";
 import TrendDown from "../../assets/images/charts/trend-down.svg";
 import LineChart from "../../components/charts/line-chart";
-import { IChartData } from "../../common/types/assets";
+import { IChartData, ISingleAsset } from "../../common/types/assets";
+import TopPriceComponent from "../../components/assetsTable";
 
 const Home: React.FC = (): JSX.Element => {
     const classes = useStyles();
@@ -35,6 +36,7 @@ const Home: React.FC = (): JSX.Element => {
         if (fetchDataRef.current) return;
         fetchDataRef.current = true;
         fetchData(popularAssetName);
+        dispatch(getTopPriceData());
     }, [popularAssetName, fetchData]);
 
     const popularAssets: IChartData[] = useAppSelector(
@@ -44,6 +46,12 @@ const Home: React.FC = (): JSX.Element => {
         (value, index, self) =>
             index === self.findIndex((t) => t.name === value.name),
     );
+    const assetsArray: ISingleAsset[] = useAppSelector(
+        (state) => state.assets.assets,
+    );
+    const filteredAssetArray = assetsArray
+        .slice()
+        .sort((a, b) => b.current_price - a.current_price);
 
     const renderPopularBlock = filteredArray.map((element: any) => {
         const currentPrice = element.singleAsset.map(
@@ -107,7 +115,17 @@ const Home: React.FC = (): JSX.Element => {
                     {filteredArray.length && <LineChart data={filteredArray} />}
                 </Grid>
             </Grid>
+            <Grid container className={classes.lineChartBlock}>
+                <Grid item xs={12} sm={12} lg={12}>
+                    {filteredAssetArray.length && (
+                        <TopPriceComponent
+                            assets={filteredAssetArray.slice(0, 6)}
+                        />
+                    )}
+                </Grid>
+            </Grid>
         </Box>
+
         // <WebsocketProvider value={socket}>
         //     <div>
         //         <h1>This is home page</h1>
