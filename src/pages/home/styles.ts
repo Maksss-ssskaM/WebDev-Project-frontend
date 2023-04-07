@@ -66,5 +66,20 @@ export const useStyles = makeStyles((theme: Theme) => {
             padding: "0 0 2px 10px",
             margin: 0,
         },
+        areaChart: {
+            marginBottom: 32,
+        },
+        lineChartBlock: {
+            backgroundColor: `${
+                theme.palette.mode === "light"
+                    ? colors.primary.DEFAULT
+                    : colors.primary[600]
+            }`,
+            padding: "20px 16px",
+            marginBottom: 32,
+            minHeight: 270,
+            border: `1px solid ${colors.borderColor}`,
+            borderRadius: 12,
+        },
     };
 });

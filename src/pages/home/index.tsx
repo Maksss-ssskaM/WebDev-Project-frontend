@@ -13,11 +13,12 @@ import { useStyles } from "./styles";
 import AreaChart from "../../components/charts/area-chart";
 import TrendUp from "../../assets/images/charts/trend-up.svg";
 import TrendDown from "../../assets/images/charts/trend-down.svg";
+import LineChart from "../../components/charts/line-chart";
+import { IChartData } from "../../common/types/assets";
 
 const Home: React.FC = (): JSX.Element => {
     const classes = useStyles();
     const popularAssetName = useMemo(() => ["bitcoin", "ethereum"], []);
-
     const dispatch = useAppDispatch();
     const fetchDataRef = useRef(false);
 
@@ -36,13 +37,14 @@ const Home: React.FC = (): JSX.Element => {
         fetchData(popularAssetName);
     }, [popularAssetName, fetchData]);
 
-    const popularAssets: any[] = useAppSelector(
+    const popularAssets: IChartData[] = useAppSelector(
         (state) => state.assets.popularAssets,
     );
     const filteredArray = popularAssets.filter(
         (value, index, self) =>
             index === self.findIndex((t) => t.name === value.name),
     );
+    console.log(filteredArray);
 
     const renderPopularBlock = filteredArray.map((element: any) => {
         const currentPrice = element.singleAsset.map(
@@ -88,7 +90,7 @@ const Home: React.FC = (): JSX.Element => {
                         </div>
                     </Grid>
                     <Grid item xs={12} sm={6} lg={6}>
-                        <AreaChart data={element.data} />
+                        <AreaChart data={element.price_chart_data} />
                     </Grid>
                 </Grid>
             </Grid>
@@ -97,8 +99,14 @@ const Home: React.FC = (): JSX.Element => {
 
     return (
         <Box className={classes.root}>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} className={classes.areaChart}>
                 {renderPopularBlock}
+            </Grid>
+            <Grid container className={classes.lineChartBlock}>
+                <Grid item xs={12} sm={12} lg={12}>
+                    {/*Проверка на длину filteredArray (не пустой ли массив)*/}
+                    {filteredArray.length && <LineChart data={filteredArray} />}
+                </Grid>
             </Grid>
         </Box>
         // <WebsocketProvider value={socket}>

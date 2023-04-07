@@ -13,7 +13,7 @@ export const getPopularAssets = createAsyncThunk(
             );
             return {
                 name: data,
-                data: assets.data.prices.slice(
+                price_chart_data: assets.data.prices.slice(
                     // срез датасета цен
                     assets.data.prices.length - 30, // от старых
                     assets.data.prices.length - 1, // к новым
