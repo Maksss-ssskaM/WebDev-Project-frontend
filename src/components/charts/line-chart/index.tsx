@@ -41,11 +41,11 @@ const LineChart: FC<ILineChartProps> = (props: ILineChartProps) => {
             },
         },
     };
-
     const values = {
-        labels: data[0].price_chart_data.map((element: any) =>
+        labels: data[0].price_chart_data.map((element: number[]) =>
             moment(element[0]).format("DD.MM.YY"),
         ),
+
         datasets: [
             {
                 label: "Bitcoin",

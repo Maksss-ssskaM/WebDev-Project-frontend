@@ -40,11 +40,10 @@ const Home: React.FC = (): JSX.Element => {
     const popularAssets: IChartData[] = useAppSelector(
         (state) => state.assets.popularAssets,
     );
-    const filteredArray = popularAssets.filter(
+    const filteredArray: IChartData[] = popularAssets.filter(
         (value, index, self) =>
             index === self.findIndex((t) => t.name === value.name),
     );
-    console.log(filteredArray);
 
     const renderPopularBlock = filteredArray.map((element: any) => {
         const currentPrice = element.singleAsset.map(

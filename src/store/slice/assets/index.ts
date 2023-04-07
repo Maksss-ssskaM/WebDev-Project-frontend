@@ -5,6 +5,7 @@ const initialState: any = {
     assets: [],
     popularAssets: [],
 };
+console.log(initialState);
 
 export const assetSlice = createSlice({
     name: "assets",

@@ -3,7 +3,7 @@ export interface IAreaChartProps {
 }
 
 export interface ILineChartProps {
-    data: any;
+    data: IChartData[];
 }
 
 interface Roi {
