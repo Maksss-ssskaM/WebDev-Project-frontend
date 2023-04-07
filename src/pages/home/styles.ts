@@ -32,7 +32,7 @@ export const useStyles = makeStyles((theme: Theme) => {
             height: "100%",
             flexDirection: "column",
             justifyContent: "flex-end",
-            paddingBottom: "20px",
+            paddingBottom: "35px",
         },
         cardPrice: {
             fontSize: 32,
@@ -40,14 +40,30 @@ export const useStyles = makeStyles((theme: Theme) => {
             lineHeight: "48px",
             margin: 0,
         },
+        additionalInfo: {
+            display: "flex",
+            alignItems: "center",
+        },
+        priceTrend: {
+            display: "flex",
+            padding: "2px",
+            backgroundColor: "#A9FFA7",
+            borderRadius: 4,
+        },
+        trendUp: {
+            backgroundColor: "#A9FFA7",
+            color: "#037400",
+        },
+        trendDown: {
+            backgroundColor: "#FFA7A7",
+            color: "#740000",
+        },
         cardCapitalize: {
             color: `${colors.secondary.DEFAULT}`,
             fontWeight: 400,
-            fontSize: 18,
+            fontSize: "18px",
             lineHeight: "21px",
-            margin: 0,
-        },
-        chart: {
+            padding: "0 0 2px 10px",
             margin: 0,
         },
     };
