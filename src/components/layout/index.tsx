@@ -11,7 +11,7 @@ const LayoutComponent: React.FC<ILayout> = ({
 }: ILayout): JSX.Element => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
-    const isNonMobile = useMediaQuery("(min-width: 600px)");
+    const isNonMobile = useMediaQuery("(min-width: 760px)");
     const classes = useStyles();
     return location.pathname === "/login" ||
         location.pathname === "/register" ? (
@@ -31,7 +31,11 @@ const LayoutComponent: React.FC<ILayout> = ({
                     setIsOpen={setIsOpen}
                 />
                 <Box className={classes.mainSection}>
-                    <TopBarComponent isOpen={isOpen} setIsOpen={setIsOpen} />
+                    <TopBarComponent
+                        isOpen={isOpen}
+                        isNonMobile={isNonMobile}
+                        setIsOpen={setIsOpen}
+                    />
                     {children}
                 </Box>
             </Box>
