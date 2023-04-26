@@ -4,7 +4,7 @@ import {
   WebsocketContext,
   WebsocketProvider,
 } from "../../common/contexts/WebsocketContext";
-import { Websocket } from "../../components/websocket/Websocket";
+import { Index } from "../../components/chat";
 import { useAppDispatch, useAppSelector } from "../../utils/hook";
 import { getPopularAssets, getTopPriceData } from "../../store/thunks/assets";
 import { Box, Grid } from "@mui/material";
@@ -98,31 +98,26 @@ const HomePage: React.FC = (): JSX.Element => {
   });
 
   return (
-    <Box className={classes.root}>
-      <Grid container spacing={2} className={classes.areaChart}>
-        {renderPopularBlock}
-      </Grid>
-      <Grid container className={classes.lineChartBlock}>
-        <Grid item xs={12} sm={12} lg={12}>
-          {/*Проверка на длину filteredArray (не пустой ли массив)*/}
-          {filteredArray.length && <LineChart data={filteredArray} />}
+    <>
+      <Box className={classes.root}>
+        <Grid container spacing={2} className={classes.areaChart}>
+          {renderPopularBlock}
         </Grid>
-      </Grid>
-      <Grid container className={classes.lineChartBlock}>
-        <Grid item xs={12} sm={12} lg={12}>
-          {filteredAssetArray.length && (
-            <TopPriceComponent assets={filteredAssetArray.slice(0, 6)} />
-          )}
+        <Grid container className={classes.lineChartBlock}>
+          <Grid item xs={12} sm={12} lg={12}>
+            {/*Проверка на длину filteredArray (не пустой ли массив)*/}
+            {filteredArray.length && <LineChart data={filteredArray} />}
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
-
-    // <WebsocketProvider value={socket}>
-    //     <div>
-    //         <h1>This is home page</h1>
-    //         <Websocket/>
-    //     </div>
-    // </WebsocketProvider>
+        <Grid container className={classes.lineChartBlock}>
+          <Grid item xs={12} sm={12} lg={12}>
+            {filteredAssetArray.length && (
+              <TopPriceComponent assets={filteredAssetArray.slice(0, 6)} />
+            )}
+          </Grid>
+        </Grid>
+      </Box>
+    </>
   );
 };
 
