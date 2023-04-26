@@ -10,6 +10,7 @@ import WatchlistPage from "./pages/watchlist";
 import NewsPage from "./pages/news";
 import SettingsPage from "./pages/settings";
 import SingleAssetPage from "./pages/single-asset";
+import ChatPage from "./pages/chat";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/watchlist" element={<WatchlistPage />} />
                 <Route path="/news" element={<NewsPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
+                <Route path="/chat" element={<ChatPage />} />
                 <Route path="/single/:id" element={<SingleAssetPage />} />
               </Route>
 
