@@ -123,7 +123,7 @@ const SidebarComponent: React.FC<ISidebarProps> = (
                     <AutoGraphOutlined />
                   </ListItemIcon>
                   <ListItemText>
-                    <Typography variant="body1">Избраное</Typography>
+                    <Typography variant="body1">Избранное</Typography>
                   </ListItemText>
                 </ListItemButton>
               </ListItem>

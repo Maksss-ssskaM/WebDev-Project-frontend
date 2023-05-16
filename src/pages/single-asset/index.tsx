@@ -144,7 +144,7 @@ const SingleAssetPage: React.FC = (): JSX.Element => {
               className={classes.cardButton}
               onClick={handleCreateRecord}
             >
-              Добавить в избраное
+              Добавить в избранное
             </Button>
           </Grid>
           <Snackbar open={open} autoHideDuration={6000}>
